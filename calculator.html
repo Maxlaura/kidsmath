@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Kids - Math Challenge</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Learn Math</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Calculator
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page Content -->
+<div class="container">
+    <canvas id="canvas" style="display: none;"></canvas>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1 class="mt-5">How far can you go?</h1>
+            <p class="lead">Welcome and enjoy quizes</p>
+        </div>
+    </div>
+
+    <!-- First card quiz -->
+    <div class="card" id="card-1">
+        <h5 class="card-header">Quiz 1</h5>
+        <div class="card-body">
+            <h5 class="card-title">What is the correct result of the given operation?</h5>
+            <p class="card-text">1 + 6 = ?</p>
+            <div class="row">
+                <div class="col-4">
+                    <input class="form-control" type="number" id="input-1">
+                </div>
+                <div class="col-2">
+                    <a href="#" class="btn btn-primary" onclick="checkChallenges()">Check!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" id="card-2">
+        <h5 class="card-header">Quiz 2</h5>
+        <div class="card-body">
+            <h5 class="card-title">What is the correct result of the given operation?</h5>
+            <p class="card-text">10 + 2 = ?</p>
+            <div class="row">
+                <div class="col-4">
+                    <input class="form-control" type="number" id="input-2">
+                </div>
+                <div class="col-2">
+                    <a href="#" class="btn btn-primary" onclick="checkChallenges()">Check!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" id="card-3">
+        <h5 class="card-header">Quiz 3</h5>
+        <div class="card-body">
+            <h5 class="card-title">What is the correct result of the given operation?</h5>
+            <p class="card-text">12 - 7 = ?</p>
+            <div class="row">
+                <div class="col-4">
+                    <input class="form-control" type="number" id="input-3">
+                </div>
+                <div class="col-2">
+                    <a href="#" class="btn btn-primary" onclick="checkChallenges()">Check!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" id="card-4">
+        <h5 class="card-header">Quiz 4</h5>
+        <div class="card-body">
+            <h5 class="card-title">What is the correct result of the given operation?</h5>
+            <p class="card-text">10 + 0 = ?</p>
+            <div class="row">
+                <div class="col-4">
+                    <input class="form-control" type="number" id="input-4">
+                </div>
+                <div class="col-2">
+                    <a href="#" class="btn btn-primary" onclick="checkChallenges()">Check!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" id="card-5">
+        <h5 class="card-header">Quiz 5</h5>
+        <div class="card-body">
+            <h5 class="card-title">What is the correct result of the given operation?</h5>
+            <p class="card-text">10 - 10 = ?</p>
+            <div class="row">
+                <div class="col-4">
+                    <input class="form-control" type="number" id="input-5">
+                </div>
+                <div class="col-2">
+                    <a href="#" class="btn btn-primary" onclick="checkChallenges()">Check!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Success -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Yay!</h5>
+                </div>
+                <div class="modal-body">
+                    Congratulations on passing the level!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="nextChallenge()">Let's go!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal error -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ouch!</h5>
+                </div>
+                <div class="modal-body">
+                    Wrong answer :(
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="resetChallenges()">Try again!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal error -->
+    <div class="modal fade" id="endModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Congratulations!</h5>
+                </div>
+                <div class="modal-body">
+                    You finished all the quizes!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="resetChallenges()">Try again!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.slim.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="./js/main.js"></script>
+<script>
+    var currentChallenge = 1;
+
+    showChallenge(currentChallenge); //init
+
+    function checkChallenges() {
+        var answer = document.getElementById("input-"+currentChallenge).value;
+        switch(currentChallenge) {
+            case 1:
+                if(answer === "7") {
+                    displaySuccess();
+                }else {
+                    displayErrorAndRestart();
+                }
+                break;
+            case 2:
+                if(answer === "12") {
+                    displaySuccess();
+                }else {
+                    displayErrorAndRestart();
+                }
+                break;
+            case 3:
+                if(answer === "5") {
+                    displaySuccess();
+                }else {
+                    displayErrorAndRestart();
+                }
+                break;
+            case 4:
+                if(answer === "10") {
+                    displaySuccess();
+                }else {
+                    displayErrorAndRestart();
+                }
+                break;
+            case 5:
+                if(answer === "0") {
+                    displaySuccess();
+                }else {
+                    displayErrorAndRestart();
+                }
+                break;
+            default:
+            // code block
+        }
+    }
+
+    function nextChallenge() {
+        if(currentChallenge === 5) {
+            $("#successModal").modal('hide');
+            $("#endModal").modal();
+        }else{
+            currentChallenge +=1;
+            showChallenge(currentChallenge);
+            document.getElementById("canvas").style.display = "none";
+            $("#successModal").modal('hide');
+        }
+    }
+
+    function displaySuccess (){
+        document.getElementById("canvas").style.display = "block";
+        $("#successModal").modal();
+    }
+
+    function displayErrorAndRestart() {
+        currentChallenge = 1; //restart challenges
+        $("#errorModal").modal();
+    }
+
+    function showChallenge(_number) {
+        //hiding all cards
+        var divsToHide = document.getElementsByClassName("card");
+        if(divsToHide.length>0){
+            for(var i = 0; i < divsToHide.length; i++){
+                if(i === _number-1) {
+                    //Current level must be shown
+                    divsToHide[i].style.display = "block";
+                }else {
+                    divsToHide[i].style.display = "none";
+                }
+            }}
+
+    }
+    function resetChallenges () {
+        document.getElementById("canvas").style.display = "none";
+        currentChallenge = 1;
+        showChallenge(currentChallenge);
+    }
+
+</script>
+
+</body>
+
+</html>
